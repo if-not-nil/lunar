@@ -1,0 +1,1 @@
+yt-dlp -o "%(artist)s - %(title)s.%(ext)s" --parse-metadata "description:(?s)(?P<meta_comment>.+)" --parse-metadata "description:(?s)(?P<meta_year>\b\d{4}\b)" --parse-metadata "description:(?s)(?P<meta_date>\d{4}-\d{2}-\d{2})" --embed-metadata --embed-thumbnail --convert-thumbnails jpg --ppa "ffmpeg: -c:v mjpeg -vf crop=\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\"" $*

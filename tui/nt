@@ -1,0 +1,22 @@
+#!/bin/bash
+nt() {
+    local notes_dir="$HOME/notes"
+    if [[ $# -gt 0 ]]; then
+        local file="$notes_dir/$1.md"
+        touch "$file"
+        "$EDITOR" "$file"
+    else
+        local selected_file
+        selected_file=$(ls -1 "$notes_dir" | fzf \
+            --height=60% \
+            --border \
+            --prompt="notes! " \
+            --preview-window=right:50%:wrap \
+            --preview="bat --style=numbers --color=always --line-range=:500 --paging=never '$notes_dir/{}'")
+        if [[ -n "$selected_file" ]]; then
+            "$EDITOR" "$notes_dir/$selected_file"
+        fi
+    fi
+}
+
+nt
