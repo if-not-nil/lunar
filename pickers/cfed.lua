@@ -20,6 +20,7 @@ os.remove(n)
 if res == "" then os.exit(1) end
 
 local ret = res:gsub("\n", "")
-os.execute("nvim " .. ret)
+local editor = os.getenv("EDITOR") or os.getenv("VISUAL") or 'nano'
+os.execute(editor .. " " .. ret)
 -- io.stdout:write(ret)
 -- io.stdout:flush()

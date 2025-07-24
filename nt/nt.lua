@@ -103,7 +103,7 @@ local function tui()
   local files = {}
   for path in find_result:lines() do
     local fullpath = location .. "/" .. path
-    local stat = io.popen("stat -c %Y " .. fullpath) or error("huh")
+    local stat = io.popen("stat -c %Y " .. fullpath) or error("stat isn't available 4 ur system")
     table.insert(files, {
       path = path,
       mtime = tonumber(stat:read()),
@@ -169,7 +169,7 @@ end
 
 local function check_deps()
   -- table means optional string means necessary
-  for _, dep in pairs({ "fzf", editor, "find", { "git", "sync not available" }, { "bat", "pretty printing not available" } }) do
+  for _, dep in pairs({ "fzf", editor, "stat", "find", { "git", "sync not available" }, { "bat", "pretty printing not available" } }) do
     if type(dep) == "table" then
       if not has(dep[1]) then
         print(dep[1] .. " not found: " .. dep[2])

@@ -27,7 +27,6 @@ local function parse_desktop_file(path)
       name = line:match("^Name=(.+)")
     elseif line:match("^Exec=") then
       exec = line:match("^Exec=(.+)")
-      -- remove arguments like %U, %f
       exec = exec:gsub("%%[fFuUdDnNickvm]", "")
     end
     if name and exec then break end
